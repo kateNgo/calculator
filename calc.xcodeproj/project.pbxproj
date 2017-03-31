@@ -46,6 +46,7 @@
 		05C4D9601E76182500AB9F52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6477FD271E8CB20C006FA758 /* Calculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Calculator.h; sourceTree = "<group>"; };
 		6477FD281E8CB20C006FA758 /* Calculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Calculator.m; sourceTree = "<group>"; };
+		6477FD2A1E8E12A4006FA758 /* guide.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = guide.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +79,7 @@
 		05C4D9451E7616DE00AB9F52 = {
 			isa = PBXGroup;
 			children = (
+				6477FD2A1E8E12A4006FA758 /* guide.txt */,
 				05C4D9501E7616DF00AB9F52 /* calc */,
 				05C4D95D1E76182500AB9F52 /* CalcTest */,
 				05C4D94F1E7616DF00AB9F52 /* Products */,
