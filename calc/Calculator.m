@@ -8,114 +8,111 @@
 
 #import "Calculator.h"
 
-@implementation Calculator{
-    NSString *operator1 ;
-    NSString *operator2;
-}
+const NSString* INCOMPLETE_EXPRESSION_ERRO = @"Incomplete expression. Expected input of the form [number] [operator number ...]";
+const char ADD = '+';
+const char SUBTRACT = '-';
+const char MULTIPLE = '*';
+const char DIVIDE = '/';
+const char MODULE = '%';
+const NSString* OPERATORS=@"+-*/%";
+const NSString* ADD_SUBTRACT=@"+-";
+const NSString* MULTI_DIVIDE=@"*/%";
+
+const NSString*  DIGIT=@"0123456789";
+
+
+@implementation Calculator {
     
--(id) init{
-    self = [super init];
-    if (self){
-        operator1 =@"*/%";
-        operator2 =@"+-";
+}
++(int) calculateArithmetic: (NSString*) n1 and: (NSString *)n2 withOperator:(char) ope {
+    int result =0;
+    switch (ope) {
+        case ADD :
+            result = [n1 intValue] + [n2 intValue];
+            break;
+        case SUBTRACT :
+            result = [n1 intValue] - [n2 intValue];
+            break;
+        case MULTIPLE :
+            result = [n1 intValue] * [n2 intValue];
+            break;
+        case DIVIDE :
+            result = [n1 intValue] / [n2 intValue];
+            break;
+        case MODULE :
+            result = [n1 intValue] % [n2 intValue];
+            break;
+        default:
+            break;
     }
-    return self;
-}
--(NSMutableArray *) parseExpression:(NSArray *) theArray withNumberItem:(int) length{
-    
-    NSMutableArray *items = [[NSMutableArray alloc] init];
-    if (length >=2){
-        for(int i=1;i<length;i++){
-            [items addObject:[NSString stringWithFormat:@"%@",[theArray objectAtIndex:i ]]];
-        }
-    }else{
-        NSLog(@"Non argument supplied");
-    }
-    return items;
-    
-}
--(int) addNumber:(int) firstNumber withNumber:(int) secondNumber{
-    
-    return firstNumber + secondNumber;
-}
--(int) subtractNumber:(int) firstNumber byNumber:(int) secondNumber{
-    return firstNumber - secondNumber;
-}
--(int) divideNumber:(int) firstNumber byNumber:(int) secondNumber{
-    return firstNumber/secondNumber;
-}
--(int) multipleNumber:(int) firstNumber withNumber:(int) secondNumber{
-    return firstNumber*secondNumber;
-}
--(int) moduleNumber:(int) firstNumber byNumber:(int) secondNumber{
-    return firstNumber % secondNumber;
-}
--(int) calculate:(NSMutableArray *) items{
-    NSMutableArray *array=[[NSMutableArray alloc]init];
-    int n=0;
-    int i=0;
-    while (i<[items count]){
-        if (i%2 == 0){
-            // operands
-            array[n] = items[i];
-            
-        }else{
-            // operators
-            if ([operator2 containsString:items[i]]){
-                // not priority
-                array[n] = items[i];
-                
-            }else{
-                n--;
-                if ([items[i] isEqualToString:@"*"]){
-                    // more priority
-                    int newValue = [array[n] intValue] * [items[++i] intValue] ;
-                    array[n] = [[NSString alloc] initWithFormat:@"%d" ,newValue];
-                    
-                }else if ([items[i] isEqualToString:@"/"]){
-                    // more priority
-                    // check devide by zero here
-                    int newValue = [array[n ] intValue] / [items[++i] intValue] ;
-                    array[n] = [[NSString alloc] initWithFormat:@"%d", newValue];
-                }else if ([items[i] isEqualToString:@"%"]){
-                    // more priority
-                    // check devide zero here
-                    int newValue = [array[n] intValue] % [items[++i] intValue] ;
-                    array[n] = [[NSString alloc] initWithFormat:@"%d", newValue];
-                }
-            }
-            
-        }
-        i++;
-        n++;
-        
-    }
-    //NSLog(@"array: %@", array);
-    
-    i = 1;
-    int result = [array[0] intValue];
-    while (i<[array count]){
-        if ( [array[i] isEqualToString:@"+" ]){
-            result = result + [array[++i] intValue];
-            
-        }else if ( [array[i] isEqualToString:@"-" ]){
-            result = result - [array[++i] intValue];
-            
-        }
-        i++;
-    }
-    //NSLog(@"Result: %d", result);
     return result;
 }
--(BOOL) validateInput:(NSArray *)inputArray{
-    
-    return 0;
-}
--(BOOL) isValidOperator:(char)ch{
-    return 0;
-}
--(BOOL) isValidNumber:(NSString *)str{
-    return 0;
++(int) calculate: (NSMutableArray *) items {
+        NSMutableArray *newArray = [[NSMutableArray alloc]init];
+        // Firstly, reduce the express by calculating operators such as * / %
+        int n = 0, i = 0;
+        while (i < [items count]) {
+            if (i % 2 == 0) {
+                // This is an operand
+                newArray[n] = items[i];
+            } else {
+                // This is an operator
+                if ([ADD_SUBTRACT containsString: items[i]]) {
+                    newArray[n] = items[i];
+                } else {
+                    n--;
+                    char ope = [items[i] characterAtIndex:0];
+                    int newValue = [Calculator calculateArithmetic:newArray[n] and:items[++i] withOperator: ope];
+                    newArray[n]= [[NSString alloc] initWithFormat:@"%d" ,newValue];
+                }
+            }
+            i++;
+            n++;
+        } // end while
+        // finaly, calculate with operators like + -
+        i = 1;
+        int result = [newArray[0] intValue];
+        while (i<[newArray count]) {
+            char ope = [newArray[i] characterAtIndex:0];
+            result = [self calculateArithmetic: [NSString stringWithFormat:@"%d", result] and:newArray[++i] withOperator: ope];
+            i++;
+        }
+        return result;
 }
 
++(BOOL) validate:(NSMutableArray *) items {
+    // number of items in a expression should be an odd number
+    if ( [items count] % 2 == 0) {
+        NSLog(@"%@", INCOMPLETE_EXPRESSION_ERRO);
+        return NO;
+    } else {
+        int i = 0;
+        while (i<[items count]) {
+            NSString *str = items[i];
+            if (i % 2 == 0) {
+                // this item must be an integer value
+                int intValue = [str intValue];
+                if ([[NSString stringWithFormat:@"%d",intValue] isEqualToString:str]) {
+                    // This is an integer value
+                    i++;
+                }else {
+                    NSLog(@"Invalid number: %@", str);
+                    return NO;
+                }
+            } else {
+                // This item must be an operator like + - * / %
+                if (str.length != 1 ){
+                    NSLog(@"Unknown operator %@", str);
+                    return NO;
+                } else if ( ![OPERATORS containsString:str] ) {
+                    NSLog(@"Unknown operator %@", str);
+                    return NO;
+                } else {
+                    i++;
+                }
+            }
+        }
+    }
+    return YES;
+}
 @end

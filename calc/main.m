@@ -6,65 +6,39 @@
 #import <Foundation/Foundation.h>
 #import "Calculator.h"
 
-#define Operator @"+-*/"
-#define digits @"0123456789 \0"
-/*
--(NSMutableArray*) parseWith:(int) argc and:(char[] *)argv
-{
-    NSMutableArray *items = [[NSMutableArray alloc] init];
-    if (length >=2){
-        for(int i=1;i<argc;i++){
-            [items addObject:[NSString stringWithUTF8String:argv[i]]]];
-        }
-    }else{
-        NSLog(@"Non argument supplied");
-    }
-    return items;
-}
-*/
+// Declare functions
+
+/**
+ This method is to parse input from command line into array of string that including operators and operands
+ This convert char[] into array of NSString
+ @param argc number of arguments
+ @param argv array of arguments
+ @return NSMutableArray an array of NSString
+ */
+
+NSMutableArray* parseInput(int argc, const char * argv[]);
+
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        Calculator *calc = [[Calculator alloc] init];
-        //NSMutableArray *items = parse(argc, argv);
-        
-        NSMutableArray *items=[[NSMutableArray alloc] init];
-       // NSLog(@"There are %d arguments", argc);
-        if (argc >=2){
-            for(int i=1;i<argc;i++){
-                [items addObject:[NSString stringWithUTF8String:argv[i]]];
-            }
-            
-        }else{
-            NSLog(@"Non argument supplied");
-            return 1;
+        NSMutableArray *items = parseInput(argc, argv);
+        if ([Calculator validate:items]){
+            int result = [Calculator calculate:items];
+            NSLog(@"result = %d", result);
         }
-        
-       // NSLog(@"equation is %@",items);
-        NSLog(@"result: %d", [calc calculate:items]);
-        
-        
-        /*
-        NSString *str = expression;
-        str = [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        NSLog(@"str:%@", str);
-        
-        NSArray *operands = [str componentsSeparatedByCharactersInSet:
-                               [NSCharacterSet characterSetWithCharactersInString:Operator]
-                               ];
-        NSArray *operators = [str componentsSeparatedByCharactersInSet:
-                              [NSCharacterSet characterSetWithCharactersInString:digits]
-                              ];
-        
-        NSLog(@"%d operands", [operands count]);
-        for(int i=0;i<[operands count];i++){
-            NSLog(@"%@\n", operands[i]);
-        }
-        NSLog(@"%d operators", [operators count]);
-        for(int i=0;i<[operators count];i++){
-            NSLog(@"%@\n", operators[i]);
-        }
-        */
-        
     }
     return 0;
+}
+
+// Implement functions
+
+NSMutableArray * parseInput (int argc, const char * argv[]) {
+    NSMutableArray *items=[[NSMutableArray alloc] init];
+    // there is at least 1 argument input
+    if (argc >= 2) {
+        for (int i = 1 ; i < argc;i++) {
+            [items addObject:[NSString stringWithUTF8String:argv[i]]];
+        }
+    }
+    return items;
 }
