@@ -11,7 +11,7 @@
 // #define operator2 = @"+-";
 
 
-@interface Calculator : NSObject{
+@interface calculator : NSObject{
 }
 
 /**
@@ -23,16 +23,16 @@
  @return int 
          the result of the expression
  */
-+(int) calculate:(NSMutableArray *) items;
+-(NSNumber *) calculate:(NSMutableArray *) items;
 
 /**
   This is to calculate an arithmetic expression like + - * / %
   @param n1 the first operand
-  @param n1 the second operand
+  @param n2 the second operand
   @param ope the operator
   @return int the result of the calculation
  */
-+(int) calculateArithmetic: (NSString*) n1 and: (NSString *)n2 withOperator:(char) ope;
+-(NSNumber *) calculateArithmetic: (NSString*) n1 and: (NSString *)n2 withOperator:(char) ope;
 
 /**
   This method is to validate all items in the expression
@@ -40,5 +40,7 @@
   item at even index in the array must be an  operand and integer value
   item at odd index in the array must be an operator like + - * / %
  */
-+(BOOL) validate:(NSMutableArray *) items;
+-(BOOL) validate:(NSMutableArray *) items;
+-(BOOL) isInteger:(NSString *) str;
 @end
+

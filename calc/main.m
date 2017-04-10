@@ -4,7 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Calculator.h"
+#import "calculator.h"
 
 // Declare functions
 
@@ -22,12 +22,20 @@ NSMutableArray* parseInput(int argc, const char * argv[]);
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         NSMutableArray *items = parseInput(argc, argv);
-        if ([Calculator validate:items]){
-            int result = [Calculator calculate:items];
-            NSLog(@"result = %d", result);
+        calculator *calc = [[calculator alloc] init];
+        NSNumber * n = [calc calculate:items];
+        if (n != nil){
+            int result = [n intValue];
+            printf("%d", result);
+            return 0;
+        }else{
+            return 1;
         }
+        
+        
     }
-    return 0;
+    
+    
 }
 
 // Implement functions

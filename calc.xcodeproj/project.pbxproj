@@ -12,7 +12,10 @@
 		05C4D9521E7616DF00AB9F52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C4D9511E7616DF00AB9F52 /* main.m */; };
 		05C4D95F1E76182500AB9F52 /* CalcTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C4D95E1E76182500AB9F52 /* CalcTest.swift */; };
 		05C4D9671E76229300AB9F52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C4D9511E7616DF00AB9F52 /* main.m */; };
-		6477FD291E8CB20C006FA758 /* Calculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6477FD281E8CB20C006FA758 /* Calculator.m */; };
+		6477FD291E8CB20C006FA758 /* calculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6477FD281E8CB20C006FA758 /* calculator.m */; };
+		64B12B841E97576A00F93986 /* calculator.h in Sources */ = {isa = PBXBuildFile; fileRef = 6477FD271E8CB20C006FA758 /* calculator.h */; };
+		64B12B851E97580500F93986 /* calculator.h in Sources */ = {isa = PBXBuildFile; fileRef = 6477FD271E8CB20C006FA758 /* calculator.h */; };
+		64B12B861E97580500F93986 /* calculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6477FD281E8CB20C006FA758 /* calculator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,8 +47,8 @@
 		05C4D95C1E76182500AB9F52 /* CalcTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalcTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C4D95E1E76182500AB9F52 /* CalcTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcTest.swift; sourceTree = "<group>"; };
 		05C4D9601E76182500AB9F52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6477FD271E8CB20C006FA758 /* Calculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Calculator.h; sourceTree = "<group>"; };
-		6477FD281E8CB20C006FA758 /* Calculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Calculator.m; sourceTree = "<group>"; };
+		6477FD271E8CB20C006FA758 /* calculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = calculator.h; sourceTree = "<group>"; };
+		6477FD281E8CB20C006FA758 /* calculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = calculator.m; sourceTree = "<group>"; };
 		6477FD2A1E8E12A4006FA758 /* guide.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = guide.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,8 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				05C4D9511E7616DF00AB9F52 /* main.m */,
-				6477FD271E8CB20C006FA758 /* Calculator.h */,
-				6477FD281E8CB20C006FA758 /* Calculator.m */,
+				6477FD271E8CB20C006FA758 /* calculator.h */,
+				6477FD281E8CB20C006FA758 /* calculator.m */,
 			);
 			path = calc;
 			sourceTree = "<group>";
@@ -207,8 +210,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64B12B841E97576A00F93986 /* calculator.h in Sources */,
 				05C4D9521E7616DF00AB9F52 /* main.m in Sources */,
-				6477FD291E8CB20C006FA758 /* Calculator.m in Sources */,
+				6477FD291E8CB20C006FA758 /* calculator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +220,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64B12B851E97580500F93986 /* calculator.h in Sources */,
+				64B12B861E97580500F93986 /* calculator.m in Sources */,
 				05C4D9671E76229300AB9F52 /* main.m in Sources */,
 				05C4D95F1E76182500AB9F52 /* CalcTest.swift in Sources */,
 			);

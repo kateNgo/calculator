@@ -195,7 +195,7 @@ class CalcTest: XCTestCase {
         XCTAssertNotNil(task4.status, "Error on integer underflow: \(task4.input)")
     }
 }
-
+/*
 class OptionalTests: XCTestCase {
     func testHandleFloatingPointValues() throws {
         let task = calcProcess("0.5", "+", "0.5")
@@ -212,3 +212,4 @@ class OptionalTests: XCTestCase {
         XCTAssertEqual(task.output, "1", "handle rational values: \(task.input)")
     }
 }
+ */
