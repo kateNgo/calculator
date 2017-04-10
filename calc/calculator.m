@@ -96,10 +96,7 @@ const NSString* DIVIDE_BY_ZERO_ERRO = @"Division by zero\n";
 
 -(BOOL) validate:(NSMutableArray *) items {
     // number of items in a expression should be an odd number
-    if ( [items count] % 2 == 0) {
-        NSLog(@"%@",INCOMPLETE_EXPRESSION_ERRO);
-        return NO;
-    } else {
+    
         int i = 0;
         while (i<[items count]) {
             NSString *str = items[i];
@@ -112,17 +109,14 @@ const NSString* DIVIDE_BY_ZERO_ERRO = @"Division by zero\n";
                 }
             } else {
                 // This item must be an operator like + - * / %
-                if (str.length != 1 ){
-                    NSLog(UNKNOW_OPERATOR_ERRO, str);
-                    return NO;
-                } else if ( ![OPERATORS containsString:str] ) {
-                    NSLog(UNKNOW_OPERATOR_ERRO, str);
-                    return NO;
-                } else {
+                if ((str.length == 1) && ([OPERATORS containsString:str]) ){
                     i++;
+                } else {
+                    NSLog(UNKNOW_OPERATOR_ERRO, str);
+                    return NO;
                 }
             }
-        }
+        
     }
     return YES;
 }
